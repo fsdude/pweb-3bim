@@ -1,0 +1,15 @@
+{% extends "provas/base.html" %}
+
+{% block title %}Provas{% endblock %}
+
+{% block content %}
+	{% for prova in provas %}
+		<h2>{{ prova.disciplina}} {{ prova.nivel}} {{ prova.autor }} {{ prova.data }}</h2>
+		{% for questao in questoes %}
+			{{ questao.descricao }}<!-- <li>{{ questao.descricao }}</li>
+			{% for alternativa in alternativas %}
+				<ul>{{ alternativa.alternativa_descricao }}</ul>
+			{% endfor%} -->
+		{% endfor %}
+	{% endfor %}
+{% endblock %}

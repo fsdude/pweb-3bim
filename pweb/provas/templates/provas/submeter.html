@@ -1,0 +1,18 @@
+{% extends "provas/base.html" %}
+
+{% block title %}Provas{% endblock %}
+
+{% block content %}
+	<h1>{{ provas.disciplina }}</h1>
+
+	<form method="POST">
+    	{% csrf_token %} 
+    	<h2>Prova</h2>
+    	{{ form1.as_p }}
+    	<h2>Questao</h2>
+    	{{ form2.as_p }}
+    	<h2>Alternativa</h2>
+    	{{ form3.as_p }}
+    	<button type="submit">Submit</button>
+	</form>
+{% endblock %}
