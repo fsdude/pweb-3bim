@@ -1,20 +1,17 @@
-from django import forms
-from .models import Prova, Questao, Alternativa
-from datetime import date
+from django.forms import ModelForm
+from provas.models import Prova, Questao, Alternativa
 
-class DateWidget(forms.DateInput):
-	input_type = "date"
+class ProvaForm(ModelForm):
+	class Meta:
+		model = Prova
+		fields = ['nivel', 'data', 'autor', 'disciplina']
 
-class ProvaForm(forms.Form):
-    nivel      = forms.IntegerField(label='nivel')
-    data       = forms.DateField(label='data', widget=DateWidget())
-    autor      = forms.CharField(label='autor', max_length=20)
-    disciplina = forms.CharField(label='disciplina', max_length=15)
+class QuestaoForm(ModelForm):
+	class Meta:
+		model = Questao
+		fields = ['prova', 'descricao', 'alternativa_correta']
 
-class QuestaoForm(forms.Form):
-	descricao           = forms.CharField(max_length=200)
-	alternativa_correta = forms.IntegerField()
-
-class AlternativaForm(forms.Form):
-	alternativa_descricao = forms.CharField(max_length=50)
-	alternativa_id 		  = forms.IntegerField()
+class AlternativaForm(ModelForm):
+	class Meta:
+		model = Alternativa
+		fields = ['questao', 'alternativa_descricao', 'alternativa_id']

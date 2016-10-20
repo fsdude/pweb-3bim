@@ -16,7 +16,7 @@ class Questao(models.Model):
 	alternativa_correta = models.IntegerField()
 
 	def __str__(self):
-		return "[{0}] - {1}".format(self.disciplina, self.alternativa_correta)
+		return "[{0}] | {1} | CORRETA: {2}".format(self.prova, self.descricao, self.alternativa_correta)
 
 class Alternativa(models.Model):
 	questao               = models.ForeignKey(Questao, on_delete=models.CASCADE)
@@ -24,4 +24,4 @@ class Alternativa(models.Model):
 	alternativa_id 		  = models.IntegerField()
 
 	def __str__(self):
-		return "Q: {0} - ID: {1}".format(self.questao, self.alternativa_id)
+		return "Q: {0} | {1} | ID: {2}".format(self.questao, self.alternativa_descricao, self.alternativa_id)

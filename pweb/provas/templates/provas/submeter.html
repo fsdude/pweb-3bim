@@ -3,16 +3,26 @@
 {% block title %}Provas{% endblock %}
 
 {% block content %}
-	<h1>{{ provas.disciplina }}</h1>
+	{% if success %}
+		<h1>Submissão concluída!</h1>
+	{% else %}
+		<h2>Submeter prova</h2>
+		<form action="{% url 'prova' %}" method="post">{% csrf_token %}
+		  {{ prova_form }}
+		  <input type="submit" value="Enviar Prova">
+		</form>
 
-	<form method="POST">
-    	{% csrf_token %} 
-    	<h2>Prova</h2>
-    	{{ form1.as_p }}
-    	<h2>Questao</h2>
-    	{{ form2.as_p }}
-    	<h2>Alternativa</h2>
-    	{{ form3.as_p }}
-    	<button type="submit">Submit</button>
-	</form>
+		<h2>Submeter questão</h2>
+		<form action="{% url 'questao' %}" method="post">{% csrf_token %}
+		  {{ questao_form }}
+		  <input type="submit" value="Enviar Questão">
+		</form>
+
+		<h2>Submeter alternativa</h2>
+		<form action="{% url 'alternativa' %}" method="post">{% csrf_token %}
+		  {{ alternativa_form }}
+		  <input type="submit" value="Enviar Alternativa">
+		</form>
+	{% endif %}
 {% endblock %}
+
