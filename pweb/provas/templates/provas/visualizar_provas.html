@@ -3,6 +3,7 @@
 {% block title %}Provas{% endblock %}
 
 {% block content %}
+	<h1>{{prova}}</h1>
 	{% for prova in provas %}
 		<h2>{{ prova.disciplina}} {{ prova.nivel}} {{ prova.autor }} {{ prova.data }}</h2>
 		{% for questao in questoes %}

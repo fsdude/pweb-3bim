@@ -5,6 +5,7 @@
 {% block content %}
 	{% if success %}
 		<h1>Submissão concluída!</h1>
+		<h2><a href="{% url 'submit' %}">Adicionar outra</a></h2>
 	{% else %}
 		<h2>Submeter prova</h2>
 		<form action="{% url 'prova' %}" method="post">{% csrf_token %}

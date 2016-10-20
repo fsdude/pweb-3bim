@@ -1,16 +1,12 @@
 from .forms import *
 from .models import *
-from django.views.generic import TemplateView, FormView
-from django.http import HttpResponseRedirect
-# from django.template import loader
-# from django.shortcuts import render
-# from django.http import HttpResponse
-# from django.http import HttpResponseRedirect
-# from django.views.generic import TemplateView
-# from django.views.generic.edit import FormView
+from django.views import generic
+from django.template import loader
+from django.shortcuts import render
+from django.views.generic import TemplateView, FormView, ListView
+from django.http import HttpResponseRedirect, HttpResponse
 
-
-# def provas(request):
+# def visualizarProvas(request):
 # 	provas = Prova.objects.all()
 # 	questoes = Questao.objects.all()
 # 	alternativas = Alternativa.objects.all()

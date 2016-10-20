@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from provas.views import SubmitView, ProvaFormView, QuestaoFormView, AlternativaFormView
+from provas.views import *
 
 urlpatterns = [
-	#url(r'^pweb/', include('provas.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', SubmitView.as_view(), name='submit'),
+    #url(r'^provas', include('provas.urls')),
+    url(r'^add', SubmitView.as_view(), name='submit'),
     url(r'^prova/submit', ProvaFormView.as_view(), name='prova'),
     url(r'^questao/submit', QuestaoFormView.as_view(), name='questao'),
     url(r'^alternativa/submit', AlternativaFormView.as_view(), name='alternativa'),
