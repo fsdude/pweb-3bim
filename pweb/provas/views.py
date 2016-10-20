@@ -6,19 +6,21 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, FormView, ListView
 from django.http import HttpResponseRedirect, HttpResponse
 
-# def visualizarProvas(request):
-# 	provas = Prova.objects.all()
-# 	questoes = Questao.objects.all()
-# 	alternativas = Alternativa.objects.all()
+class VisualizarProvas(TemplateView):
+	template_name = 'provas/visualizar_provas.html'
 
-# 	template = loader.get_template('provas/provas.html')
-# 	context = {
-# 		'provas': provas,
-# 		'questoes': questoes,
-# 		'alternativas': alternativas,
-# 	}
+	def get_context_data(self, **kwargs):
+		provas = Prova.objects.all()
+		questoes = Questao.objects.all()
+		alternativas = Alternativa.objects.all()
 
-# 	return HttpResponse(template.render(context, request))
+		context = {
+			'provas': provas,
+			'questoes': questoes,
+			'alternativas': alternativas,
+		}
+
+		return context
 
 class SubmitView(TemplateView):
 	template_name = 'provas/submeter.html'

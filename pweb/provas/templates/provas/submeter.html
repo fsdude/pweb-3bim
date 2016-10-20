@@ -7,6 +7,8 @@
 		<h1>Submissão concluída!</h1>
 		<h2><a href="{% url 'submit' %}">Adicionar outra</a></h2>
 	{% else %}
+		<h2><a href="{% url 'visualizar_provas' %}">Visualizar provas</a></h2>
+
 		<h2>Submeter prova</h2>
 		<form action="{% url 'prova' %}" method="post">{% csrf_token %}
 		  {{ prova_form }}
