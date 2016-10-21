@@ -2,12 +2,43 @@
 
 {% block title %}Provas{% endblock %}
 
+<script>
+{% block javascript %}	
+	function changeSelection(){
+		var	prova_search = document.getElementById("search_prova").value;
+			prova_selected = document.getElementById("select_prova");
+			prova_search = prova_selected.value;
+	}
+
+	function initProva(){
+		var prova_search = document.getElementById("search_prova").value;
+			prova_selected = document.getElementById("select_prova");
+			prova_search = prova_selected.value;
+	}
+
+	function redirect(){
+		var prova_selected = document.getElementById("select_prova");
+		 	current_url = window.location.href;
+			prova_search = prova_selected.value;
+			new_url = current_url.replace(/add/, "provas/" + prova_search.toString());
+			window.location.href = new_url;
+	}
+{% endblock %}
+</script>
+
+
 {% block content %}
+<body onload="initProva()">
 	{% if success %}
 		<h1>Submissão concluída!</h1>
 		<h2><a href="{% url 'submit' %}">Adicionar outra</a></h2>
 	{% else %}
-		<h2><a href="{% url 'visualizar_provas' %}">Visualizar provas</a></h2>
+		<select id="select_prova" onchange="changeSelection()">
+			{% for prova in provas %}
+				<option value="{{ prova.id }}">{{ prova }}</option>
+			{% endfor %}
+		</select>
+		<h2><p id="prova_search" value=1 onclick="redirect()">Visualizar prova</p></h2>
 
 		<h2>Submeter prova</h2>
 		<form action="{% url 'prova' %}" method="post">{% csrf_token %}
@@ -20,12 +51,6 @@
 		  {{ questao_form }}
 		  <input type="submit" value="Enviar Questão">
 		</form>
-
-		<h2>Submeter alternativa</h2>
-		<form action="{% url 'alternativa' %}" method="post">{% csrf_token %}
-		  {{ alternativa_form }}
-		  <input type="submit" value="Enviar Alternativa">
-		</form>
 	{% endif %}
+</body>
 {% endblock %}
-

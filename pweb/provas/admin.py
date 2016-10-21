@@ -4,4 +4,3 @@ from .models import *
 
 admin.site.register(Prova)
 admin.site.register(Questao)
-admin.site.register(Alternativa)

@@ -3,14 +3,17 @@
 {% block title %}Provas{% endblock %}
 
 {% block content %}
-	<h1>{{prova}}</h1>
-	{% for prova in provas %}
-		<h2>{{ prova.disciplina}} {{ prova.nivel}} {{ prova.autor }} {{ prova.data }}</h2>
-		{% for questao in questoes %}
-			{{ questao.descricao }}<!-- <li>{{ questao.descricao }}</li>
-			{% for alternativa in alternativas %}
-				<ul>{{ alternativa.alternativa_descricao }}</ul>
-			{% endfor%} -->
-		{% endfor %}
+	<h2>{{ provas.disciplina }} {{ provas.nivel}} {{ provas.autor }} {{ provas.data }}</h2>
+	<ol type="1">
+	{% for questao in questoes %}
+		<li>{{ questao.enunciado }}</li>
+		<ol type="a">
+			<li>{{ questao.alternativa_a }}</li>
+			<li>{{ questao.alternativa_b }}</li>
+			<li>{{ questao.alternativa_c }}</li>
+			<li>{{ questao.alternativa_d }}</li>
+			<li>{{ questao.alternativa_e }}</li>
+		</ol>
 	{% endfor %}
+	</ol>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from provas.models import Prova, Questao, Alternativa
+from provas.models import Prova, Questao
 
 class ProvaForm(ModelForm):
 	class Meta:
@@ -9,9 +9,5 @@ class ProvaForm(ModelForm):
 class QuestaoForm(ModelForm):
 	class Meta:
 		model = Questao
-		fields = ['prova', 'descricao', 'alternativa_correta']
-
-class AlternativaForm(ModelForm):
-	class Meta:
-		model = Alternativa
-		fields = ['questao', 'alternativa_descricao', 'alternativa_id']
+		fields = ['prova', 'enunciado', 'alternativa_a', 'alternativa_b',
+		 'alternativa_c', 'alternativa_d', 'alternativa_e' ,'alternativa_correta']
