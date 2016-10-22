@@ -1,0 +1,33 @@
+{% extends "provas/base.html" %}
+
+{% block title %}Provas{% endblock %}
+
+{% block content %}
+	<h2>{{ provas.disciplina }} {{ provas.nivel}} {{ provas.autor }} {{ provas.data }}</h2>
+	<form action="{% url 'responder_prova' provas.id %}" method="post">
+		{% csrf_token %}
+		<ol type="1">
+		{% for questao in questoes %}
+			<li>{{ questao.enunciado }}</li>
+				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_a }}">
+				<label>{{ questao.alternativa_a }}</label><br>
+
+				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_b }}">
+				<label>{{ questao.alternativa_b }}</label><br>
+				
+				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_c }}">
+				<label>{{ questao.alternativa_c }}</label><br>
+				
+				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_d }}">
+				<label>{{ questao.alternativa_d }}</label><br>
+				
+				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_e }}">
+				<label>{{ questao.alternativa_e }}</label>
+
+				{{ resposta }}
+		{% endfor %}
+		</ol>
+		{{ form.as_p }}
+		<input type="submit" value="Submeter"></input>
+	</form>
+{% endblock %}

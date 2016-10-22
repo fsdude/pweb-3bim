@@ -2,6 +2,16 @@
 
 {% block title %}Provas{% endblock %}
 
+<script>
+{% block javascript %}	
+	function redirect(){
+		var current_url = window.location.href;
+			current_url += "/responder"
+			window.location.href = current_url;
+	}
+{% endblock %}
+</script>
+
 {% block content %}
 	<h2>{{ provas.disciplina }} {{ provas.nivel}} {{ provas.autor }} {{ provas.data }}</h2>
 	<ol type="1">
@@ -16,4 +26,6 @@
 		</ol>
 	{% endfor %}
 	</ol>
+
+	<h2><p onclick="redirect()">Responder prova</p></h2>
 {% endblock %}

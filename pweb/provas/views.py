@@ -1,17 +1,42 @@
 from .forms import *
 from .models import *
 from django.views import generic
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import *
 from django.http import HttpResponseRedirect, HttpResponse
 
-class VisualizarProvas(TemplateView):
-	template_name = 'provas/visualizar_provas.html'
+class ResponderProvaView(FormView):
+	template_name = 'provas/responder_prova.html'
+	success_url = '/'
 
 	def get_context_data(self, **kwargs):
 		provas = Prova.objects.get(id=self.kwargs['id'])
 		questoes = provas.questao_set.all()
 
-		print (questoes.values_list('id'))
+		context = {
+			'provas': provas,
+			'questoes': questoes,
+		}
+
+		return context
+
+	def post(self, request, *args, **kwargs):
+		form = ProvaResponderForm(request.POST or None)
+		if form.is_valid():
+			print ("ok")
+		
+
+		return self.render_to_response(
+			self.get_context_data(
+				success = True
+			)
+		)
+
+class VisualizarProvaView(TemplateView):
+	template_name = 'provas/visualizar_prova.html'
+
+	def get_context_data(self, **kwargs):
+		provas = Prova.objects.get(id=self.kwargs['id'])
+		questoes = provas.questao_set.all()
 
 		context = {
 			'provas': provas,
