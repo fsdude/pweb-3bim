@@ -20,7 +20,7 @@ from provas.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^provas/(?P<id>\d+)$', VisualizarProvaView.as_view(), name='visualizar_prova'),
-    url(r'^provas/(?P<id>\d+)/responder', ResponderProvaView.as_view(), name='responder_prova'),
+    url(r'^provas/(?P<id>\d+)/responder', ResponderProvaFormView.as_view(), name='responder_prova'),
     url(r'^add', SubmitView.as_view(), name='submit'),
     url(r'^prova/submit', ProvaFormView.as_view(), name='prova'),
     url(r'^questao/submit', QuestaoFormView.as_view(), name='questao'),

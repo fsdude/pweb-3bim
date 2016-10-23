@@ -2,14 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from provas.models import Prova, Questao
 
-ESCOLHAS = (
-		('a', 'alternativa a'),
-		('b', 'alternativa b'),
-	)
-
-class ProvaResponderForm(forms.Form):
-	escolha = forms.ChoiceField(widget=forms.RadioSelect, choices=ESCOLHAS)
-
 class ProvaForm(ModelForm):
 	class Meta:
 		model = Prova

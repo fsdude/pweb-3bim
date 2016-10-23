@@ -4,8 +4,10 @@
 
 {% block content %}
 	<h2>{{ provas.disciplina }} {{ provas.nivel}} {{ provas.autor }} {{ provas.data }}</h2>
-	<form action="{% url 'responder_prova' provas.id %}" method="post">
-		{% csrf_token %}
+	{% if success %}
+		<p>Você acertou {{ acertos }}/{{ total }}</p>
+	{% else %} 
+	<form action="{% url 'responder_prova' provas.id %}" method="get">
 		<ol type="1">
 		{% for questao in questoes %}
 			<li>{{ questao.enunciado }}</li>
@@ -23,11 +25,9 @@
 				
 				<input type="radio" name="{{ questao.id }}" value="{{ questao.alternativa_e }}">
 				<label>{{ questao.alternativa_e }}</label>
-
-				{{ resposta }}
 		{% endfor %}
 		</ol>
-		{{ form.as_p }}
 		<input type="submit" value="Submeter"></input>
 	</form>
+	{% endif %}
 {% endblock %}
