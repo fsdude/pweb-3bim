@@ -1,5 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.db import models
-from datetime import date
 
 class Prova(models.Model):
 	NIVEL_PROVA = ((1, 'Fácil'), (2, 'Normal'), (3, 'Difícil'))

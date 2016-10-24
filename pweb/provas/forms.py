@@ -1,4 +1,5 @@
-from django import forms
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from provas.models import Prova, Questao
 
