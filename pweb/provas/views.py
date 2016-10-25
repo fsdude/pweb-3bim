@@ -1,5 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""
+Esse views.py é responsável pelo processamento dos dados.
+É aqui é decidido os quais valores serão renderizados
+no template.
+
+'ResponderProvaFormView':
+	retorna a quantidade de acertos da prova resolvida
+
+'VisualizarProvaView':
+	retorna a prova selecionada pelo usuário para
+	ser visualizada
+
+'SubmitView':
+	manda para o template quais os campos dos forms devem
+	ser preenchidos
+
+
+'ProvaFormView' e 'QuestaoFormView':
+	salvam os dados inseridos nos forms no banco de dados
+"""
 from .forms import ProvaForm, QuestaoForm
 from .models import Prova, Questao
 from django.views.generic import FormView, TemplateView

@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""
+Importação das urls definidas no projeto.
+"""
 from django.conf.urls import url
 
 from . import views

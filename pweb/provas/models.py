@@ -1,5 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""
+models.py é responsável por criar/atualizar/deletar o banco de dados.
+Ele converte esse código em python para a linguagem usada do bd
+e consegue criar as TABLES e COLUMNs.
+
+'Prova' e 'Questao' são as tabelas do banco de dados.
+	E 'Questao' aponta para Prova, então uma 'Prova' pode ter
+	muitas 'Questao'.
+"""
 from django.db import models
 
 class Prova(models.Model):
