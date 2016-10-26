@@ -55,6 +55,8 @@
 
 		<h2>Submeter questão</h2>
 		<form class="form" action="{% url 'questao' %}" method="post">{% csrf_token %}
+			<h4>prova</h4>
+		  	{{ questao_form.prova }}
 			<h4>enunciado</h4>
 		  	{{ questao_form.enunciado }}
 		  	<h4>alternativa a</h4>
