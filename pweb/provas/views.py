@@ -54,19 +54,17 @@ class ResponderProvaFormView(TemplateView):
 		self.acertos          = 0
 		self.success          = False
 
-		for resposta in (0, (self.questoes.count()-1)):
+		for resposta in range(0, (self.questoes.count())):
 			self.questao_ids_fake.append(self.questoes.values_list('id')[resposta])
 			self.questao_ids.append(''.join(map(str, self.questao_ids_fake[resposta])))
 
-		for resposta in (1, self.questoes.count()):
-			x = self.questao_ids[resposta-1]
+		for resposta in range(0, self.questoes.count()):
+			x = self.questao_ids[resposta]
 			self.respostas_list.append(request.GET.get(str(x)))
 
-
 		self.questao_list = Questao.objects.filter(id__in=self.questao_ids)	
-		# self.questao = Questao.objects.filter(id=self.questao_list[x].id)		
 
-		for x in (0, (self.questoes.count() - 1)):
+		for x in range(0, (self.questoes.count())):
 			alt_list = [
 				(self.questao_list[x].alternativa_a),
 				(self.questao_list[x].alternativa_b),
@@ -76,7 +74,8 @@ class ResponderProvaFormView(TemplateView):
 			]
 			self.alternativa_list.append(alt_list)
 
-		for resposta in (1, self.questoes.count()):
+
+		for resposta in range(1, self.questoes.count()+1):
 			if self.respostas_list[resposta-1] == self.alternativa_list[resposta-1][self.questao_list[resposta-1].alternativa_correta-1]:
 				self.acertos += 1
 				self.success = True
