@@ -38,17 +38,38 @@
 				<option value="{{ prova.id }}">{{ prova }}</option>
 			{% endfor %}
 		</select>
-		<h2><p id="prova_search" value=1 onclick="redirect()">Visualizar prova</p></h2>
+		<h2 class="button" id="prova_search" value=1 onclick="redirect()">Visualizar prova</h2>
 
 		<h2>Submeter prova</h2>
-		<form action="{% url 'prova' %}" method="post">{% csrf_token %}
-		  {{ prova_form }}
+		<form class="form" action="{% url 'prova' %}" method="post">{% csrf_token %}
+		  <h4>nível</h4>
+		  {{ prova_form.nivel }}
+		  <h4>data (AAAA/MM/DD)</h4>
+		  {{ prova_form.data }}
+		  <h4>autor</h4>
+		  {{ prova_form.autor }}
+		  <h4>disciplina</h4>
+		  {{ prova_form.disciplina }}
 		  <input type="submit" value="Enviar Prova">
 		</form>
 
 		<h2>Submeter questão</h2>
-		<form action="{% url 'questao' %}" method="post">{% csrf_token %}
-		  {{ questao_form }}
+		<form class="form" action="{% url 'questao' %}" method="post">{% csrf_token %}
+			<h4>enunciado</h4>
+		  	{{ questao_form.enunciado }}
+		  	<h4>alternativa a</h4>
+		  	{{ questao_form.alternativa_a }}
+		  	<h4>alternativa b</h4>
+		  	{{ questao_form.alternativa_b }}
+		  	<h4>alternativa c</h4>
+		  	{{ questao_form.alternativa_c }}
+		  	<h4>alternativa d</h4>
+		  	{{ questao_form.alternativa_d }}
+		  	<h4>alternativa e</h4>
+		  	{{ questao_form.alternativa_e }}
+		  	<h4>alternativa correta</h4>
+		  	{{ questao_form.alternativa_correta }}
+
 		  <input type="submit" value="Enviar Questão">
 		</form>
 	{% endif %}

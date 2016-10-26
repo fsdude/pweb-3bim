@@ -36,6 +36,7 @@ class ResponderProvaFormView(TemplateView):
 		success = self.success
 		context = {
 			'provas': provas,
+			'questoes': questoes,
 			'acertos': acertos,
 			'total': total,
 			'success': success,
@@ -46,23 +47,24 @@ class ResponderProvaFormView(TemplateView):
 	def get(self, request, *args, **kwargs):
 		provas = Prova.objects.get(id=self.kwargs['id'])
 		self.questoes = provas.questao_set.all()
-		respostas_list   = []
-		questao_ids      = []
-		questao_ids_fake = []
-		alternativa_list = []
+		self.respostas_list   = []
+		self.questao_ids      = []
+		self.questao_ids_fake = []
+		self.alternativa_list = []
 		self.acertos          = 0
 		self.success          = False
 
 		for resposta in (0, (self.questoes.count()-1)):
-			questao_ids_fake.append(self.questoes.values_list('id')[resposta])
-			questao_ids.append(''.join(map(str, questao_ids_fake[resposta])))
+			self.questao_ids_fake.append(self.questoes.values_list('id')[resposta])
+			self.questao_ids.append(''.join(map(str, self.questao_ids_fake[resposta])))
 
 		for resposta in (1, self.questoes.count()):
-			x = questao_ids[resposta-1]
-			respostas_list.append(request.GET.get(str(x)))
+			x = self.questao_ids[resposta-1]
+			self.respostas_list.append(request.GET.get(str(x)))
 
 
-		self.questao_list = Questao.objects.filter(id__in=questao_ids)	
+		self.questao_list = Questao.objects.filter(id__in=self.questao_ids)	
+		# self.questao = Questao.objects.filter(id=self.questao_list[x].id)		
 
 		for x in (0, (self.questoes.count() - 1)):
 			alt_list = [
@@ -72,14 +74,13 @@ class ResponderProvaFormView(TemplateView):
 				(self.questao_list[x].alternativa_d),
 				(self.questao_list[x].alternativa_e)
 			]
-			alternativa_list.append(alt_list)
+			self.alternativa_list.append(alt_list)
 
 		for resposta in (1, self.questoes.count()):
-			if respostas_list[resposta-1] == alternativa_list[resposta-1][self.questao_list[resposta-1].alternativa_correta-1]:
+			if self.respostas_list[resposta-1] == self.alternativa_list[resposta-1][self.questao_list[resposta-1].alternativa_correta-1]:
 				self.acertos += 1
 				self.success = True
-			elif respostas_list[resposta-1] is None:
-				print (respostas_list[resposta-1])
+			elif self.respostas_list[resposta-1] is None:
 				self.success = False
 			else:
 				self.success = True
